@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="FtpSecureNetwork">
+  <DataContextMoniker Name="/FtpSecureNetworkDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5f609bb5-38bf-4305-9b0d-20f601067476" absoluteBounds="0.75, 3.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/FtpSecureNetworkDataContext/Notification" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8818e92c-e867-437c-999d-5de313ac97e2" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="31ea9d6b-841e-4ea3-830a-351414f382b1" absoluteBounds="4.875, 4.375, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/FtpSecureNetworkDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="20f222c1-ddec-4f51-8cce-9f2e37b7b48e" absoluteBounds="4.89, 4.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="966639c3-eb66-4d29-8b3b-4f320b8af6fd" absoluteBounds="8.625, 1.625, 2, 1.9631982421875">
+      <DataClassMoniker Name="/FtpSecureNetworkDataContext/UserLog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a563f489-158e-4385-b5c5-c0c91240caba" absoluteBounds="8.64, 2.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f658aff7-b4d7-47df-b230-4d4243c571ac" absoluteBounds="4.75, 2, 2, 1.9631982421875">
+      <DataClassMoniker Name="/FtpSecureNetworkDataContext/FileShare" />
+      <nestedChildShapes>
+        <elementListCompartment Id="88bd8d55-80d5-498c-a51f-b5cbfb00f972" absoluteBounds="4.765, 2.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="51aa1250-9eaf-4de9-812a-9e0921cd0b0d" absoluteBounds="1.875, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/FtpSecureNetworkDataContext/File" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dd6c0e0c-a071-4d92-81fa-668df432d25f" absoluteBounds="1.8900000000000001, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
