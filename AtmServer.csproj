@@ -7,7 +7,7 @@
     <ProjectGuid>{D1BA5B8F-68CB-41C8-B841-0F430AD985ED}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FtpServerUI</RootNamespace> 
+    <RootNamespace>FtpServerUI</RootNamespace>
     <AssemblyName>FtpServerUI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -51,35 +51,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCode\Context\AtmSecure.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AtmSecure.dbml</DependentUpon>
+    </Compile>
     <Compile Include="AppCode\Context\FtpSecureNetwork.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FtpSecureNetwork.dbml</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\Controllers\AtmControllerBase.cs" />
+    <Compile Include="AppCode\Controllers\BaseController.cs" />
     <Compile Include="AppCode\Controllers\ControllerBase.cs" />
-    <Compile Include="AppCode\Controllers\FileShareController.cs" />
-    <Compile Include="AppCode\Controllers\FileController.cs" />
-    <Compile Include="AppCode\Controllers\UserController.cs" />
+    <Compile Include="AppCode\Controllers\LogController.cs" />
+    <Compile Include="AppCode\Controllers\MainFormController.cs" />
     <Compile Include="AppCode\CryptographyObject.cs" />
-    <Compile Include="AppCode\DtoModels\FileDto.cs" />
+    <Compile Include="AppCode\DtoModels\LogDto.cs" />
+    <Compile Include="AppCode\DtoModels\AccountDto.cs" />
     <Compile Include="AppCode\Dto\Credentials.cs" />
     <Compile Include="AppCode\Dto\JsonFormat.cs" />
     <Compile Include="AppCode\Dto\JsonResponse.cs" />
     <Compile Include="AppCode\Dto\JsonRequest.cs" />
-    <Compile Include="AppCode\DtoModels\UserDto.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="AppCode\Services\CustomerService.cs" />
+    <Compile Include="AppCode\Services\AccountService.cs" />
+    <Compile Include="AppCode\Services\BaseService.cs" />
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="AppCode\Context\AtmSecure.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AtmSecure.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="AppCode\Context\FtpSecureNetwork.dbml.layout">
       <DependentUpon>FtpSecureNetwork.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <None Include="AppCode\Context\AtmSecure.dbml.layout">
+      <DependentUpon>AtmSecure.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

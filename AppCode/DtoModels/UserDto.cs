@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FtpServerUI.AppCode.DtoModels
 {
-    class UserDto
+    public class UserDto
     {
         public decimal IdUser{ get; set; }
         public string Username{ get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FtpServerUI.AppCode.Dto
 {
-    class JsonFormat
+    public class JsonFormat
     {
         public Credentials Credentials { get; set; }
     }

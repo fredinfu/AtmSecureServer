@@ -33,5 +33,16 @@ namespace FtpServerUI.Properties {
                 return ((string)(this["FtpSecureNetworkConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=SecureAtm;Persist Security Info=True;User I" +
+            "D=sa;Password=1234")]
+        public string SecureAtmConnectionString {
+            get {
+                return ((string)(this["SecureAtmConnectionString"]));
+            }
+        }
     }
 }

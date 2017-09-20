@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.5" name="AtmSecure">
+  <DataContextMoniker Name="/AtmSecureDataContext" />
+  <nestedChildShapes>
+    <classShape Id="6b231785-b95b-4604-b550-ed54d631a0ed" absoluteBounds="0.75, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/AtmSecureDataContext/Account" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d5340611-beea-482c-a6a7-13e63463f41f" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="81737d9a-7fd2-44af-9631-5dc7883aae0e" absoluteBounds="3.75, 0.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/AtmSecureDataContext/Atm" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0a03fe3e-5304-4e59-b209-dd925e45e350" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b6b6fbb8-2ea9-4cc1-a8cc-adfd87dac6a8" absoluteBounds="0.75, 3.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/AtmSecureDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a0459c09-15c7-4d33-b36f-8225c0d06bce" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7401c5a8-6d27-4204-9457-d716f2ed70c0" absoluteBounds="3.75, 3.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/AtmSecureDataContext/Log" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4171f3c3-d196-4027-80e6-415f5e1984e0" absoluteBounds="3.765, 4.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6efebd3d-e5e8-452a-bcd1-9740fb152bbb" absoluteBounds="6.75, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/AtmSecureDataContext/Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3645689e-3b70-485b-802d-963fc243bc61" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1f85e58f-ade9-40f5-bbbf-920e92177e44" absoluteBounds="0.75, 6.75, 2, 2.5401025390624996">
+      <DataClassMoniker Name="/AtmSecureDataContext/Transaction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="73758661-2934-4ed4-aa98-ea04b9c8d7d9" absoluteBounds="0.765, 7.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FtpServerUI.AppCode.Controllers
 {
-    class ControllerBase
+    class AtmControllerBase
     {
-        protected static FtpSecureNetworkDataContext _context;
+        protected static AtmSecureDataContext _context;
         public JsonRequest JsonRequest { get; set; }
         public string Result{ get; set; }
         public string Username { get; set; }
@@ -19,10 +19,10 @@ namespace FtpServerUI.AppCode.Controllers
         {
             if (JsonRequest.Credentials.CustomerNumber.Trim() == string.Empty)
             {
-                _context.UserLogs.InsertOnSubmit(new UserLog
+                _context.Logs.InsertOnSubmit(new Log
                 {
                     Action = "Ocurrió un problema con las credenciales.",
-                    CreatedBy = 1,
+                    Customer = JsonRequest.Credentials.CustomerNumber,
                     CreatedDate = DateTime.Now,
                     Description = "El servidor no reconoció el usuario que emitió la acción."
                 });
@@ -32,21 +32,21 @@ namespace FtpServerUI.AppCode.Controllers
 
             try
             {
-                var log = new UserLog
+                var log = new Log
                 {
                     Action = JsonRequest.Action,
                     Description = Result,
                     CreatedDate = DateTime.Now,
-                    CreatedByUsername = JsonRequest.Credentials.CustomerNumber
+                    Customer = JsonRequest.Credentials.CustomerNumber
                 };
-                _context.UserLogs.InsertOnSubmit(log);
+                _context.Logs.InsertOnSubmit(log);
                 _context.SubmitChanges();
 
             }catch (Exception ex){
-                _context.UserLogs.InsertOnSubmit(new UserLog
+                _context.Logs.InsertOnSubmit(new Log
                 {
                     Action = "Guardar bitácora.",
-                    CreatedBy = 1,
+                    Customer = "1",
                     CreatedDate = DateTime.Now,
                     Description = "El servidor no pudo guardar los datos correctamente."
                 });

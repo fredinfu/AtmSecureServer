@@ -30,6 +30,22 @@ namespace FtpServerUI.AppCode
 
             return md5String;
         }
+
+        public string stringToMd5(string word)
+        {
+            var md5 = new MD5CryptoServiceProvider();
+
+            var md5String = string.Empty;
+            var bytes = Encoding.GetEncoding("Windows-1252").GetBytes(word);
+            bytes = md5.ComputeHash(bytes);
+            foreach (var byteChar in bytes)
+            {
+                md5String += byteChar.ToString("X2").ToUpper();
+            }
+
+            return md5String;
+        }
+
         public string Encriptar(string texto)
         {
             try

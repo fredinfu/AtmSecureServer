@@ -8,25 +8,25 @@ using System.Threading.Tasks;
 
 namespace FtpServerUI.AppCode.Controllers
 {
-    class UserController : ControllerBase
+    class AccountController : AtmControllerBase
     {
         
-        public UserController()
+        public AccountController()
         {
-            _context = new FtpSecureNetworkDataContext();
+            _context = new AtmSecureDataContext();
         }
 
-        public UserController(JsonRequest json)
+        public AccountController(JsonRequest json)
         {
             JsonRequest = json;
-            _context = new FtpSecureNetworkDataContext();
+            _context = new AtmSecureDataContext();
         }
 
         public void Login()
         {
-            var res = _context.Users
-                .FirstOrDefault(w => w.Username == JsonRequest.Credentials.CustomerNumber && 
-                w.Password == JsonRequest.Credentials.Pin);
+            var res = _context.Customers
+                .FirstOrDefault(w => w.CustomerNumber == JsonRequest.Credentials.CustomerNumber && 
+                w.Pin == JsonRequest.Credentials.Pin);
 
             Result = res == null ? "Denegado" : "Autorizado";
             LlenarBitacora();

@@ -1,7 +1,8 @@
-﻿using FtpServerUI.AppCode; 
+﻿using FtpServerUI.AppCode;
 using FtpServerUI.AppCode.Controllers;
 using FtpServerUI.AppCode.Dto;
 using FtpServerUI.AppCode.DtoModels;
+using FtpServerUI.AppCode.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ using System.Windows.Forms;
 
 namespace FtpServerUI
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         class Client
         {
@@ -32,27 +33,25 @@ namespace FtpServerUI
         private static List<Socket> _clientSockets = new List<Socket>();
         private static List<Client> _clients = new List<Client>();
         private static Socket _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        private MainFormController _controller;
+        private LogController _logController;
         public static string JsonRequest { get; set; }
 
         delegate void SetTextCallback(string text);
         delegate void AddUserCallback(string text);
-
+        #region UpdateUI
         private void SetRichText(string text)
         {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (this.rtTramaEntranteDesc.InvokeRequired)
+            if (rtTramaEntranteDesc.InvokeRequired)
             {
                 SetTextCallback d = new SetTextCallback(SetRichText);
-                this.Invoke(d, new object[] { text });
+                Invoke(d, new object[] { text });
             }
             else
             {
-                this.rtTramaEntranteDesc.Text = text;
+                rtTramaEntranteDesc.Text = text;
             }
         }
-
         private void UpdateTramaJsonEntrante(string json, string encrypt)
         {
             Invoke((MethodInvoker)(delegate
@@ -65,7 +64,6 @@ namespace FtpServerUI
                 rtTramaEntranteEncrypt.Text = encrypt;
             }));
         }
-
         private void UpdateHash(string cliente, string server)
         {
             Invoke((MethodInvoker)(delegate
@@ -78,7 +76,6 @@ namespace FtpServerUI
                 lbHashServer.Text = server;
             }));
         }
-
         private void UpdateTramaJsonSaliente(string json, string encrypt)
         {
             Invoke((MethodInvoker)(delegate
@@ -92,7 +89,14 @@ namespace FtpServerUI
             }));
 
         }
+        private void UpdateBitacora()
+        {
+            Invoke((MethodInvoker)(delegate
+            {
+                dgBitacora.DataSource = _logController.GetAll();
+            }));
 
+        }
         private void AddUserConnected(string user)
         {
             Invoke((MethodInvoker)(delegate
@@ -100,10 +104,15 @@ namespace FtpServerUI
                 lboxUsuariosConectados.Items.Add(user);
             }));
         }
-        public Form1()
+
+        #endregion
+        public MainForm()
         {
             InitializeComponent();
             SetupServer();
+            _controller = new MainFormController();
+            _logController = new LogController();
+            dgBitacora.DataSource = _logController.GetAll();
         }
 
         private void SetupServer()
@@ -117,7 +126,6 @@ namespace FtpServerUI
         {
             var socket = _serverSocket.EndAccept(AR);
             _clientSockets.Add(socket);
-            //socket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), socket);
             socket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), socket);
             _serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
         }
@@ -143,91 +151,64 @@ namespace FtpServerUI
             UpdateHash(jsonSimpleRequest.Credentials.Hash, serverHash);
 
             var jsonResponse = new JsonResponse();
-            if (jsonSimpleRequest.Credentials.Hash != serverHash)
+
+            #region ValidateHash
+                if (jsonSimpleRequest.Credentials.Hash != serverHash)
+                {
+                    MessageBox.Show("El cliente ha creado una petición con una llave inválida.");
+                    return;
+                }
+                if (jsonSimpleRequest == null)
+                {
+                    MessageBox.Show("Ha ocurrido un error con la petición del cliente");
+                    return;
+                }
+                if (jsonSimpleRequest.Action == "Desconectar del sistema")
+                {
+                    MessageBox.Show("Usuario se ha desconectado.");
+                    return;
+                }
+            #endregion
+
+            switch (jsonSimpleRequest.Service)
             {
-                MessageBox.Show("El cliente ha creado una petición con una llave inválida.");
-                return;
-            }
-            if (jsonSimpleRequest == null)
-            {
-                MessageBox.Show("Ha ocurrido un error con la petición del cliente");
-                return;
-            }
-            if(jsonSimpleRequest.Action == "Desconectar del sistema")
-            {
-                MessageBox.Show("Usuario se ha desconectado.");
-                return;
-            }
-            switch (jsonSimpleRequest.Controller)
-            {
-                case "UserController":
-                    var userController = new UserController(jsonSimpleRequest);
+                case "CustomerService":
+                    _controller.SetJsonRequest(jsonSimpleRequest);
                     switch (jsonSimpleRequest.Action)
                     {
                         case "Iniciar Sesion":
-
-                            userController.Login();
-                            jsonResponse.Result = userController.Result;
-
-                            switch (userController.Result)
+                            _controller.Login();
+                            jsonResponse = _controller.JsonResponse;
+                            if (_controller.JsonResponse.MessageResult == "Autorizado")
                             {
-                                case "Autorizado":
-                                    AddUserConnected(jsonSimpleRequest.Credentials.Username);
-                                    jsonResponse.Credentials = userController.JsonRequest.Credentials;
-                                    break;
-                                case "Denegado":
-                                    break;
+                                AddUserConnected(jsonSimpleRequest.Credentials.CustomerNumber);
                             }
                             break;
-                        case "Cerrar Sesion":
-                            break;
                     }
                     break;
-                case "FileShareController":
-                    var fileShareController = new FileShareController(jsonSimpleRequest);
-
+                
+                case "AccountService":
+                    _controller.SetJsonRequest(jsonSimpleRequest);
                     switch (jsonSimpleRequest.Action)
                     {
-                            case "Compartir Archivo":
-                            fileShareController.ShareFile();
-                            jsonResponse.Result = fileShareController.Result;
-                            break;
-                    }
-                    break;
-                case "FileController":
-                    var fileController = new FileController(jsonSimpleRequest);
-                    switch (jsonSimpleRequest.Action)
-                    {
-                        case "Subir Archivo":
-                            //fileController.UploadFile();
-                            fileController.UploadFileData();
-                            jsonResponse.Result = fileController.Result;
-                            break;
-                        case "Listar Archivos":
-                            jsonResponse.Files = fileController.GetUserFiles();
-                            jsonResponse.Result = fileController.Result;
-                            break;
-                        case "Listar Archivos Compartidos":
-                            jsonResponse.Files = fileController.GetSharedFiles();
-                            jsonResponse.Users = jsonResponse.Files.Select(s => new UserDto
-                            {
-                                Username = s.CreatedByUsername
-                            }).Distinct().ToList();
-                            jsonResponse.Result = fileController.Result;
+                            case "Seleccionar Cuenta":
+                            _controller.GetAccount();
+                            jsonResponse = _controller.JsonResponse;
                             break;
                     }
                     break;
 
                 default:
-                    jsonResponse.Result = "Invalid Request";
+                    jsonResponse.MessageResult = "Invalid Request";
                     break;
 
             }
+            UpdateBitacora();
             //userController.Username = jsonSimpleRequest.Credentials.Username;
             //userController.Accion = jsonSimpleRequest.Action;
 
             //userController.Login(jsonSimpleRequest.Credentials);
-            //if (userController.Result == "1") AddUserConnected(userController.Username);
+            //if (userController.MessageResult == "1") AddUserConnected(userController.Username);
 
             //SetRichText( JsonRequest );
             //var response = string.Empty;
@@ -283,76 +264,29 @@ namespace FtpServerUI
                 MessageBox.Show("Usuario se ha desconectado.");
                 return;
             }
-            switch (jsonSimpleRequest.Controller)
-            {
-                case "UserController":
-                    var userController = new UserController(jsonSimpleRequest);
-                    switch (jsonSimpleRequest.Action)
-                    {
-                        case "Iniciar Sesion":
+            //switch (jsonSimpleRequest.Service)
+            //{
+            //    case "CustomerService":
+            //        var customerController = new CustomerService(jsonSimpleRequest);
+            //        switch (jsonSimpleRequest.Action)
+            //        {
+            //            case "Iniciar Sesion":
+            //                AddUserConnected(jsonSimpleRequest.Credentials.CustomerNumber);
+            //                jsonResponse.Credentials = customerController.JsonRequest.Credentials;
+            //            break;
+            //        }
+            //        break;
 
-                            userController.Login();
-                            jsonResponse.Result = userController.Result;
+            //    default:
+            //        jsonResponse.MessageResult = "Invalid Request";
+            //        break;
 
-                            switch (userController.Result)
-                            {
-                                case "Autorizado":
-                                    AddUserConnected(jsonSimpleRequest.Credentials.Username);
-                                    jsonResponse.Credentials = userController.JsonRequest.Credentials;
-                                    break;
-                                case "Denegado":
-                                    break;
-                            }
-                            break;
-                        case "Cerrar Sesion":
-                            break;
-                    }
-                    break;
-                case "FileShareController":
-                    var fileShareController = new FileShareController(jsonSimpleRequest);
-
-                    switch (jsonSimpleRequest.Action)
-                    {
-                        case "Compartir Archivo":
-                            fileShareController.ShareFile();
-                            jsonResponse.Result = fileShareController.Result;
-                            break;
-                    }
-                    break;
-                case "FileController":
-                    var fileController = new FileController(jsonSimpleRequest);
-                    switch (jsonSimpleRequest.Action)
-                    {
-                        case "Subir Archivo":
-                            //fileController.UploadFile();
-                            fileController.UploadFileData();
-                            jsonResponse.Result = fileController.Result;
-                            break;
-                        case "Listar Archivos":
-                            jsonResponse.Files = fileController.GetUserFiles();
-                            jsonResponse.Result = fileController.Result;
-                            break;
-                        case "Listar Archivos Compartidos":
-                            jsonResponse.Files = fileController.GetSharedFiles();
-                            jsonResponse.Users = jsonResponse.Files.Select(s => new UserDto
-                            {
-                                Username = s.CreatedByUsername
-                            }).Distinct().ToList();
-                            jsonResponse.Result = fileController.Result;
-                            break;
-                    }
-                    break;
-
-                default:
-                    jsonResponse.Result = "Invalid Request";
-                    break;
-
-            }
+            //}
             //userController.Username = jsonSimpleRequest.Credentials.Username;
             //userController.Accion = jsonSimpleRequest.Action;
 
             //userController.Login(jsonSimpleRequest.Credentials);
-            //if (userController.Result == "1") AddUserConnected(userController.Username);
+            //if (userController.MessageResult == "1") AddUserConnected(userController.Username);
 
             //SetRichText( JsonRequest );
             //var response = string.Empty;

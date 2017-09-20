@@ -25,7 +25,7 @@ namespace FtpServerUI.AppCode.Controllers
         public List<FileDto> GetSharedFiles()
         {
             var mySharedFiles = _context.FileShares
-                .Where(w => w.SharedToUsername == JsonRequest.Credentials.Username)
+                .Where(w => w.SharedToUsername == JsonRequest.Credentials.CustomerNumber)
                 .ToList();
             var files = new List<decimal>();
             foreach(var file in mySharedFiles)
@@ -51,7 +51,7 @@ namespace FtpServerUI.AppCode.Controllers
         public List<FileDto> GetUserFiles()
         {
             var res = _context.Files
-                .Where(w => w.CreatedByUsername == JsonRequest.Credentials.Username)
+                .Where(w => w.CreatedByUsername == JsonRequest.Credentials.CustomerNumber)
                 .Select(s => new FileDto
                 {
                     IdFile = s.IdFile,
@@ -72,7 +72,7 @@ namespace FtpServerUI.AppCode.Controllers
                 var file = new File
                 {
                     FileName = JsonRequest.FileAux.FileName,
-                    CreatedByUsername = JsonRequest.Credentials.Username,
+                    CreatedByUsername = JsonRequest.Credentials.CustomerNumber,
                     CreatedBy = 0,
                     CreatedDate = DateTime.Now
                 };
@@ -95,7 +95,7 @@ namespace FtpServerUI.AppCode.Controllers
                 {
                     FileName = JsonRequest.FileAux.FileName,
                     FileData = JsonRequest.FileAux.FileData,
-                    CreatedByUsername = JsonRequest.Credentials.Username,
+                    CreatedByUsername = JsonRequest.Credentials.CustomerNumber,
                     CreatedBy = 0,
                     CreatedDate = DateTime.Now
                 };

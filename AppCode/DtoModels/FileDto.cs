@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FtpServerUI.AppCode.DtoModels
 {
-    class FileDto
+    public class FileDto
     {
         public FileDto()
         {

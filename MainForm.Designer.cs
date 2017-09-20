@@ -1,6 +1,6 @@
 ﻿namespace FtpServerUI 
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lboxUsuariosConectados = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lbHashServer = new System.Windows.Forms.Label();
             this.lbHashClient = new System.Windows.Forms.Label();
@@ -41,17 +47,15 @@
             this.rtTramaSalienteEncrypt = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.rtTramaSalienteDesc = new System.Windows.Forms.RichTextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lboxUsuariosConectados = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dgBitacora = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBitacora)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -59,11 +63,72 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(795, 515);
             this.tabControl1.TabIndex = 1;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox1);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.lboxUsuariosConectados);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(787, 486);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Settings";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(444, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(337, 341);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Conectar Servidor";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(114, 196);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(109, 41);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Apagar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(114, 104);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(109, 41);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Encender";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(143, 17);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Usuarios Conectados";
+            // 
+            // lboxUsuariosConectados
+            // 
+            this.lboxUsuariosConectados.FormattingEnabled = true;
+            this.lboxUsuariosConectados.ItemHeight = 16;
+            this.lboxUsuariosConectados.Location = new System.Drawing.Point(6, 23);
+            this.lboxUsuariosConectados.Name = "lboxUsuariosConectados";
+            this.lboxUsuariosConectados.Size = new System.Drawing.Size(432, 324);
+            this.lboxUsuariosConectados.TabIndex = 1;
             // 
             // tabPage1
             // 
@@ -183,65 +248,25 @@
             this.rtTramaSalienteDesc.TabIndex = 2;
             this.rtTramaSalienteDesc.Text = "";
             // 
-            // tabPage3
+            // tabPage4
             // 
-            this.tabPage3.Controls.Add(this.groupBox1);
-            this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.lboxUsuariosConectados);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(787, 486);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Settings";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage4.Controls.Add(this.dgBitacora);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(787, 486);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Bitacora";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // dgBitacora
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 17);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Usuarios Conectados";
-            // 
-            // lboxUsuariosConectados
-            // 
-            this.lboxUsuariosConectados.FormattingEnabled = true;
-            this.lboxUsuariosConectados.ItemHeight = 16;
-            this.lboxUsuariosConectados.Location = new System.Drawing.Point(6, 23);
-            this.lboxUsuariosConectados.Name = "lboxUsuariosConectados";
-            this.lboxUsuariosConectados.Size = new System.Drawing.Size(432, 324);
-            this.lboxUsuariosConectados.TabIndex = 1;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(444, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(337, 341);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Conectar Servidor";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(114, 104);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 41);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Encender";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(114, 196);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 41);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Apagar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.dgBitacora.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBitacora.Location = new System.Drawing.Point(6, 6);
+            this.dgBitacora.Name = "dgBitacora";
+            this.dgBitacora.RowTemplate.Height = 24;
+            this.dgBitacora.Size = new System.Drawing.Size(636, 474);
+            this.dgBitacora.TabIndex = 0;
             // 
             // Form1
             // 
@@ -252,13 +277,15 @@
             this.Name = "Form1";
             this.Text = "ATM Server";
             this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgBitacora)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -284,6 +311,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView dgBitacora;
     }
 }
 

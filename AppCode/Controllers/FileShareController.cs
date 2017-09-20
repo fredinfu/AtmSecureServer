@@ -44,7 +44,7 @@ namespace FtpServerUI.AppCode.Controllers
         public List<FileDto> GetUserFiles()
         {
             var res = _context.Files
-                .Where(w => w.CreatedByUsername == JsonRequest.Credentials.Username)
+                .Where(w => w.CreatedByUsername == JsonRequest.Credentials.CustomerNumber)
                 .Select(s => new FileDto
                 {
                     IdFile = s.IdFile,
