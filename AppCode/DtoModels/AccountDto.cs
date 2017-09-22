@@ -11,5 +11,8 @@ namespace FtpServerUI.AppCode.DtoModels
         public string AccountNumber { get; set; }
         public string Description { get; set; }
         public decimal? Balance{ get; set; }
+        public decimal? Withdrawal { get; set; }
+        public decimal? Deposit { get; set; }
+        public decimal? Transfer { get; set; }
     }
 }

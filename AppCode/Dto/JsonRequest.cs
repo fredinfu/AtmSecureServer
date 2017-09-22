@@ -11,6 +11,7 @@ namespace FtpServerUI.AppCode.Dto
     {
         public string Service { get; set; }
         public string Action { get; set; }
+        public AccountDto Account { get; set; }
 
     }
 }

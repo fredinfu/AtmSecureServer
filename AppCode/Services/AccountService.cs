@@ -40,5 +40,18 @@ namespace FtpServerUI.AppCode.Services
             };
             LlenarBitacora();
         }
+
+        public void Withdrawal()
+        {
+            var res = _context.Accounts.FirstOrDefault(w => w.AccountNumber == JsonRequest.Credentials.CustomerNumber);
+            res.Balance = res.Balance - JsonRequest.Account.Withdrawal;
+
+            JsonResponse.Account = new AccountDto
+            {
+                AccountNumber = res.AccountNumber,
+                Description = res.Description,
+                Balance = res.Balance
+            };
+        }
     }
 }
