@@ -14,5 +14,6 @@ namespace FtpServerUI.AppCode.Dto
         public string CustomerName { get; set; }
         public List<LogDto> Logs { get; set; }
         public AccountDto Account { get; set; }
+        public ProductDto Product { get; set; }
     }
 }

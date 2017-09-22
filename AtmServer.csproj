@@ -67,12 +67,14 @@
     <Compile Include="AppCode\Controllers\LogController.cs" />
     <Compile Include="AppCode\Controllers\MainFormController.cs" />
     <Compile Include="AppCode\CryptographyObject.cs" />
+    <Compile Include="AppCode\DtoModels\ProductDto.cs" />
     <Compile Include="AppCode\DtoModels\LogDto.cs" />
     <Compile Include="AppCode\DtoModels\AccountDto.cs" />
     <Compile Include="AppCode\Dto\Credentials.cs" />
     <Compile Include="AppCode\Dto\JsonFormat.cs" />
     <Compile Include="AppCode\Dto\JsonResponse.cs" />
     <Compile Include="AppCode\Dto\JsonRequest.cs" />
+    <Compile Include="AppCode\Services\ProductService.cs" />
     <Compile Include="AppCode\Services\CustomerService.cs" />
     <Compile Include="AppCode\Services\AccountService.cs" />
     <Compile Include="AppCode\Services\BaseService.cs" />
