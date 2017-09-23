@@ -80,6 +80,9 @@ namespace FtpServerUI.AppCode.Services
         public void Transfer()
         {
             var account = _context.Accounts.FirstOrDefault(w => w.AccountNumber == JsonRequest.Credentials.CustomerNumber);
+
+            if(account.Balance-JsonRequest.Account.Transfer < 0) { JsonResponse.MessageResult = "No se puede transferir esa cantidad de dinero, supera a tus fondos actuales."; LlenarBitacora(); return; }
+
             account.Balance -= JsonRequest.Account.Transfer;
 
             var destinyAccount = _context.Accounts.FirstOrDefault(w => w.AccountNumber == JsonRequest.DestinyNumber);
