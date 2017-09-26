@@ -56,14 +56,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AtmSecure.dbml</DependentUpon>
     </Compile>
-    <Compile Include="AppCode\Context\FtpSecureNetwork.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FtpSecureNetwork.dbml</DependentUpon>
-    </Compile>
     <Compile Include="AppCode\Controllers\AtmControllerBase.cs" />
     <Compile Include="AppCode\Controllers\BaseController.cs" />
-    <Compile Include="AppCode\Controllers\ControllerBase.cs" />
     <Compile Include="AppCode\Controllers\LogController.cs" />
     <Compile Include="AppCode\Controllers\MainFormController.cs" />
     <Compile Include="AppCode\CryptographyObject.cs" />
@@ -74,6 +68,7 @@
     <Compile Include="AppCode\Dto\JsonFormat.cs" />
     <Compile Include="AppCode\Dto\JsonResponse.cs" />
     <Compile Include="AppCode\Dto\JsonRequest.cs" />
+    <Compile Include="AppCode\Services\LogService.cs" />
     <Compile Include="AppCode\Services\ProductService.cs" />
     <Compile Include="AppCode\Services\CustomerService.cs" />
     <Compile Include="AppCode\Services\AccountService.cs" />
@@ -91,9 +86,6 @@
       <LastGenOutput>AtmSecure.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="AppCode\Context\FtpSecureNetwork.dbml.layout">
-      <DependentUpon>FtpSecureNetwork.dbml</DependentUpon>
-    </None>
     <None Include="AppCode\Context\AtmSecure.dbml.layout">
       <DependentUpon>AtmSecure.dbml</DependentUpon>
     </None>
@@ -109,11 +101,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="AppCode\Context\FtpSecureNetwork.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>FtpSecureNetwork.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

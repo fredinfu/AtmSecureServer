@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FtpServerUI.AppCode.Context
+namespace AtmServer.AppCode.Context
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -36,9 +36,6 @@ namespace FtpServerUI.AppCode.Context
     partial void InsertAtm(Atm instance);
     partial void UpdateAtm(Atm instance);
     partial void DeleteAtm(Atm instance);
-    partial void InsertCustomer(Customer instance);
-    partial void UpdateCustomer(Customer instance);
-    partial void DeleteCustomer(Customer instance);
     partial void InsertLog(Log instance);
     partial void UpdateLog(Log instance);
     partial void DeleteLog(Log instance);
@@ -48,6 +45,9 @@ namespace FtpServerUI.AppCode.Context
     partial void InsertTransaction(Transaction instance);
     partial void UpdateTransaction(Transaction instance);
     partial void DeleteTransaction(Transaction instance);
+    partial void InsertCustomer(Customer instance);
+    partial void UpdateCustomer(Customer instance);
+    partial void DeleteCustomer(Customer instance);
     #endregion
 		
 		public AtmSecureDataContext() : 
@@ -96,14 +96,6 @@ namespace FtpServerUI.AppCode.Context
 			}
 		}
 		
-		public System.Data.Linq.Table<Customer> Customers
-		{
-			get
-			{
-				return this.GetTable<Customer>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Log> Logs
 		{
 			get
@@ -125,6 +117,14 @@ namespace FtpServerUI.AppCode.Context
 			get
 			{
 				return this.GetTable<Transaction>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Customer> Customers
+		{
+			get
+			{
+				return this.GetTable<Customer>();
 			}
 		}
 	}
@@ -468,164 +468,6 @@ namespace FtpServerUI.AppCode.Context
 					this._Busy = value;
 					this.SendPropertyChanged("Busy");
 					this.OnBusyChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customer")]
-	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _CustomerNumber;
-		
-		private string _FirstName;
-		
-		private string _LastName;
-		
-		private string _Pin;
-		
-		private string _Address;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCustomerNumberChanging(string value);
-    partial void OnCustomerNumberChanged();
-    partial void OnFirstNameChanging(string value);
-    partial void OnFirstNameChanged();
-    partial void OnLastNameChanging(string value);
-    partial void OnLastNameChanged();
-    partial void OnPinChanging(string value);
-    partial void OnPinChanged();
-    partial void OnAddressChanging(string value);
-    partial void OnAddressChanged();
-    #endregion
-		
-		public Customer()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNumber", DbType="NVarChar(32) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string CustomerNumber
-		{
-			get
-			{
-				return this._CustomerNumber;
-			}
-			set
-			{
-				if ((this._CustomerNumber != value))
-				{
-					this.OnCustomerNumberChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerNumber = value;
-					this.SendPropertyChanged("CustomerNumber");
-					this.OnCustomerNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50)")]
-		public string FirstName
-		{
-			get
-			{
-				return this._FirstName;
-			}
-			set
-			{
-				if ((this._FirstName != value))
-				{
-					this.OnFirstNameChanging(value);
-					this.SendPropertyChanging();
-					this._FirstName = value;
-					this.SendPropertyChanged("FirstName");
-					this.OnFirstNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50)")]
-		public string LastName
-		{
-			get
-			{
-				return this._LastName;
-			}
-			set
-			{
-				if ((this._LastName != value))
-				{
-					this.OnLastNameChanging(value);
-					this.SendPropertyChanging();
-					this._LastName = value;
-					this.SendPropertyChanged("LastName");
-					this.OnLastNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pin", DbType="NVarChar(256)")]
-		public string Pin
-		{
-			get
-			{
-				return this._Pin;
-			}
-			set
-			{
-				if ((this._Pin != value))
-				{
-					this.OnPinChanging(value);
-					this.SendPropertyChanging();
-					this._Pin = value;
-					this.SendPropertyChanged("Pin");
-					this.OnPinChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(256)")]
-		public string Address
-		{
-			get
-			{
-				return this._Address;
-			}
-			set
-			{
-				if ((this._Address != value))
-				{
-					this.OnAddressChanging(value);
-					this.SendPropertyChanging();
-					this._Address = value;
-					this.SendPropertyChanged("Address");
-					this.OnAddressChanged();
 				}
 			}
 		}
@@ -1292,6 +1134,188 @@ namespace FtpServerUI.AppCode.Context
 					this._CreatedDate = value;
 					this.SendPropertyChanged("CreatedDate");
 					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customer")]
+	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CustomerNumber;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private string _Pin;
+		
+		private string _Address;
+		
+		private string _Telefono;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCustomerNumberChanging(string value);
+    partial void OnCustomerNumberChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
+    partial void OnPinChanging(string value);
+    partial void OnPinChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnTelefonoChanging(string value);
+    partial void OnTelefonoChanged();
+    #endregion
+		
+		public Customer()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNumber", DbType="NVarChar(32) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CustomerNumber
+		{
+			get
+			{
+				return this._CustomerNumber;
+			}
+			set
+			{
+				if ((this._CustomerNumber != value))
+				{
+					this.OnCustomerNumberChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerNumber = value;
+					this.SendPropertyChanged("CustomerNumber");
+					this.OnCustomerNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pin", DbType="NVarChar(256)")]
+		public string Pin
+		{
+			get
+			{
+				return this._Pin;
+			}
+			set
+			{
+				if ((this._Pin != value))
+				{
+					this.OnPinChanging(value);
+					this.SendPropertyChanging();
+					this._Pin = value;
+					this.SendPropertyChanged("Pin");
+					this.OnPinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(256)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="NVarChar(50)")]
+		public string Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this.OnTelefonoChanging(value);
+					this.SendPropertyChanging();
+					this._Telefono = value;
+					this.SendPropertyChanged("Telefono");
+					this.OnTelefonoChanged();
 				}
 			}
 		}

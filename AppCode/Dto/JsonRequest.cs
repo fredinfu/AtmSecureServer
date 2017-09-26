@@ -1,11 +1,11 @@
-﻿using FtpServerUI.AppCode.DtoModels; 
+﻿using AtmServer.AppCode.DtoModels; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FtpServerUI.AppCode.Dto
+namespace AtmServer.AppCode.Dto
 {
     public class JsonRequest : JsonFormat
     {
@@ -13,6 +13,7 @@ namespace FtpServerUI.AppCode.Dto
         public string Action { get; set; }
         public AccountDto Account { get; set; }
         public string DestinyNumber { get; set; }
+        public string Telefono { get; set; }
 
     }
 }

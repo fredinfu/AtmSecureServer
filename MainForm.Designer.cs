@@ -1,4 +1,4 @@
-﻿namespace FtpServerUI 
+﻿namespace AtmServer
 {
     partial class MainForm
     {

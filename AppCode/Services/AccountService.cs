@@ -1,13 +1,13 @@
-﻿using FtpServerUI.AppCode.Context;
-using FtpServerUI.AppCode.Dto;
-using FtpServerUI.AppCode.DtoModels;
+﻿using AtmServer.AppCode.Context;
+using AtmServer.AppCode.Dto;
+using AtmServer.AppCode.DtoModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FtpServerUI.AppCode.Services
+namespace AtmServer.AppCode.Services
 {
     public class AccountService : BaseService
     {
@@ -73,7 +73,7 @@ namespace FtpServerUI.AppCode.Services
                 Description = res.Description,
                 Balance = res.Balance
             };
-            JsonResponse.MessageResult = $"Se ha depositado a su cuenta L.{JsonRequest.Account.Withdrawal}.";
+            JsonResponse.MessageResult = $"Se ha depositado a su cuenta L.{JsonRequest.Account.Deposit}.";
             LlenarBitacora();
         }
 
@@ -81,11 +81,15 @@ namespace FtpServerUI.AppCode.Services
         {
             var account = _context.Accounts.FirstOrDefault(w => w.AccountNumber == JsonRequest.Credentials.CustomerNumber);
 
-            if(account.Balance-JsonRequest.Account.Transfer < 0) { JsonResponse.MessageResult = "No se puede transferir esa cantidad de dinero, supera a tus fondos actuales."; LlenarBitacora(); return; }
+            
+
+            if (account.Balance-JsonRequest.Account.Transfer < 0) { JsonResponse.MessageResult = "No se puede transferir esa cantidad de dinero, supera a tus fondos actuales."; LlenarBitacora(); return; }
 
             account.Balance -= JsonRequest.Account.Transfer;
 
             var destinyAccount = _context.Accounts.FirstOrDefault(w => w.AccountNumber == JsonRequest.DestinyNumber);
+            if (destinyAccount == null) { JsonResponse.MessageResult = "Se ha intentado transferir un monton a una cuenta no existente."; LlenarBitacora(); return; }
+
             destinyAccount.Balance += JsonRequest.Account.Transfer;
 
             JsonResponse.MessageResult = $"Se ha transferido L.{JsonRequest.Account.Transfer} a la cuenta {JsonRequest.DestinyNumber}.";

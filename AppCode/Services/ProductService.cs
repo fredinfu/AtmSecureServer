@@ -1,13 +1,13 @@
-﻿using FtpServerUI.AppCode.Context;
-using FtpServerUI.AppCode.Dto;
-using FtpServerUI.AppCode.DtoModels;
+﻿using AtmServer.AppCode.Context;
+using AtmServer.AppCode.Dto;
+using AtmServer.AppCode.DtoModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FtpServerUI.AppCode.Services
+namespace AtmServer.AppCode.Services
 {
     public class ProductService : BaseService
     {
@@ -25,7 +25,7 @@ namespace FtpServerUI.AppCode.Services
         {
 
             var res = _context.Products
-                .Where(w => w.CustomerNumber == JsonRequest.Credentials.CustomerNumber)
+                .Where(w => w.CustomerNumber == JsonRequest.Credentials.CustomerNumber && w.Balance > 0)
                 .Select(s => new ProductDto
                 {
                     ProductNumber = s.ProductNumber,
@@ -60,12 +60,21 @@ namespace FtpServerUI.AppCode.Services
 
         public void Pay()
         {
+            if (!TieneFondos()) { JsonResponse.MessageResult = "No se puede pagar esa cantidad de dinero, supera a tus fondos actuales."; LlenarBitacora(); return; }
+
             var res = _context.Products.FirstOrDefault(w => w.ProductNumber == JsonRequest.DestinyNumber);
             res.Balance -= JsonRequest.Account.Deposit;
 
-            if(res.ProductType == "CREDITCARD") { res.Credit += Convert.ToDecimal(JsonRequest.Account.Deposit); }
             JsonResponse.MessageResult = $"Se ha hecho un pago con el monto de: L.{JsonRequest.Account.Deposit} para el producto: {res.Alias}.";
+
+            if (res.ProductType == "CREDITCARD") { res.Credit += Convert.ToDecimal(JsonRequest.Account.Deposit); }
+            _context.SubmitChanges();
             LlenarBitacora();
+        }
+
+        private bool TieneFondos()
+        {
+            return _context.Accounts.FirstOrDefault(w => w.AccountNumber == JsonRequest.Credentials.CustomerNumber).Balance > JsonRequest.Account.Deposit;
         }
 
     }

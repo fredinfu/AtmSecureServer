@@ -1,13 +1,13 @@
-﻿using FtpServerUI.AppCode.Context;
-using FtpServerUI.AppCode.Dto;
-using FtpServerUI.AppCode.DtoModels;
+﻿using AtmServer.AppCode.Context;
+using AtmServer.AppCode.Dto;
+using AtmServer.AppCode.DtoModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FtpServerUI.AppCode.Services
+namespace AtmServer.AppCode.Services
 {
     public class BaseService
     {
@@ -49,6 +49,7 @@ namespace FtpServerUI.AppCode.Services
                     Action = JsonRequest.Action,
                     Description = JsonResponse.MessageResult,
                     CreatedDate = DateTime.Now,
+                    IsDeleted = false,
                     Customer = JsonRequest.Credentials.CustomerNumber
                 };
                 _context.Logs.InsertOnSubmit(log);
@@ -57,14 +58,15 @@ namespace FtpServerUI.AppCode.Services
             }
             catch (Exception ex)
             {
-                _context.Logs.InsertOnSubmit(new Log
-                {
-                    Action = "Guardar bitácora.",
-                    Customer = "1",
-                    CreatedDate = DateTime.Now,
-                    Description = "El servidor no pudo guardar los datos correctamente."
-                });
-                _context.SubmitChanges();
+                //_context.Logs.InsertOnSubmit(new Log
+                //{
+                //    Action = "Guardar bitácora.",
+                //    Customer = "1",
+                //    IsDeleted = false,
+                //    CreatedDate = DateTime.Now,
+                //    Description = "El servidor no pudo guardar los datos correctamente."
+                //});
+                //_context.SubmitChanges();
             }
 
             JsonResponse.Logs = _context.Logs

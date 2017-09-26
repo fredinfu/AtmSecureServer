@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FtpServerUI.AppCode.DtoModels
+namespace AtmServer.AppCode.DtoModels
 {
     public class LogDto
     {

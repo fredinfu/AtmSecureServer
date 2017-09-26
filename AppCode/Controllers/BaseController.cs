@@ -1,11 +1,11 @@
-﻿using FtpServerUI.AppCode.Dto;
+﻿using AtmServer.AppCode.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FtpServerUI.AppCode.Controllers
+namespace AtmServer.AppCode.Controllers
 {
     public class BaseController
     {
